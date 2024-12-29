@@ -1,13 +1,15 @@
 package com.webapp.Configuration.Mapper;
 
-import com.webapp.DTO.ProductCategoryDTO;
+import com.webapp.DTO.Product.ProductCategoryDTO;
 import com.webapp.Model.Product.ProductCategory;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {ProductMapper.class})
+@Mapper(componentModel = "spring")
 public interface ProductCategoryMapper {
-    ProductCategoryMapper INSTANCE = Mappers.getMapper(ProductCategoryMapper.class);
-    ProductCategoryDTO toProductCategoryDTO(ProductCategory productCategory);
+    @Mapping(source = "parentCategory", target = "parentCategory", ignore = true)
+    ProductCategoryDTO toDTO(ProductCategory productCategory);
+
+    @Mapping(source = "parentCategory", target = "parentCategory", ignore = true)
     ProductCategory toEntity(ProductCategoryDTO productCategoryDTO);
 }

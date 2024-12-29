@@ -1,6 +1,6 @@
 package com.webapp.Controller;
 
-import com.webapp.DTO.ProductCategoryDTO;
+import com.webapp.DTO.Product.ProductCategoryDTO;
 import com.webapp.Service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,7 @@ public class ProductCategoryController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProductCategory(@PathVariable Integer id, @RequestBody ProductCategoryDTO productCategoryDTO) {
         try {
-            ProductCategoryDTO updatedProductCategory = productCategoryService.updateProductCategory(id, productCategoryDTO);
+            ProductCategoryDTO productCategory = productCategoryService.updateProductCategory(id, productCategoryDTO);
             return ResponseEntity.ok("Product category updated successfully");
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Product category not found");

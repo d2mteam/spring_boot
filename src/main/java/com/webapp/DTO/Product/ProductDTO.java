@@ -1,4 +1,4 @@
-package com.webapp.DTO;
+package com.webapp.DTO.Product;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +10,5 @@ public class ProductDTO {
     private String name;
     private String description;
     private String productImage;
-    private ProductCategoryDTO productCategoryDTO;
+    private ProductCategoryDTO category;
 }

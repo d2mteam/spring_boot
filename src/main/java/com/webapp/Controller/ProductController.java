@@ -1,6 +1,6 @@
 package com.webapp.Controller;
 
-import com.webapp.DTO.ProductDTO;
+import com.webapp.DTO.Product.ProductDTO;
 import com.webapp.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable Integer id, @RequestBody ProductDTO productDTO) {
         try {
-            ProductDTO updatedProduct = productService.updateProduct(id, productDTO);
+            ProductDTO product = productService.updateProduct(id, productDTO);
             return ResponseEntity.ok("Product updated successfully");
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Product not found");

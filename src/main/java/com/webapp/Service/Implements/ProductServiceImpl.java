@@ -1,10 +1,10 @@
-package com.webapp.Service.Impl;
+package com.webapp.Service.Implements;
 
-import com.webapp.DTO.ProductDTO;
+import com.webapp.Configuration.Mapper.ProductMapper;
+import com.webapp.DTO.Product.ProductDTO;
 import com.webapp.Model.Product.Product;
 import com.webapp.Repository.ProductRepository;
 import com.webapp.Service.ProductService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,33 +16,38 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private ProductMapper productMapper;
 
+    @Override
     public ProductDTO createProduct(ProductDTO productDTO) {
-        Product product = modelMapper.map(productDTO, Product.class);
+        Product product = productMapper.toEntity(productDTO);
         product = productRepository.save(product);
-        return modelMapper.map(product, ProductDTO.class);
+        return productMapper.toDTO(product);
     }
 
+    @Override
     public ProductDTO getProductById(Integer id) {
         Product product = productRepository.findById(id).orElse(null);
-        return modelMapper.map(product, ProductDTO.class);
+        return productMapper.toDTO(product);
     }
 
+    @Override
     public ProductDTO updateProduct(Integer id, ProductDTO productDTO) {
         productDTO.setId(id);
-        Product product = modelMapper.map(productDTO, Product.class);
+        Product product = productMapper.toEntity(productDTO);
         product = productRepository.save(product);
-        return modelMapper.map(product, ProductDTO.class);
+        return productMapper.toDTO(product);
     }
 
+    @Override
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream()
-                .map(product -> modelMapper.map(product, ProductDTO.class))
+                .map(productMapper::toDTO)
                 .toList();
     }
 
+    @Override
     public void deleteProduct(Integer id) {
         productRepository.deleteById(id);
     }

@@ -1,6 +1,6 @@
 package com.webapp.Service;
 
-import com.webapp.DTO.ProductCategoryDTO;
+import com.webapp.DTO.Product.ProductCategoryDTO;
 
 import java.util.List;
 
